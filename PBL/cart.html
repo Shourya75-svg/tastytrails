@@ -1,0 +1,410 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tasty Trails - Your Cart</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .cart-container {
+      background: #fff;
+      max-width: 650px;
+      width: 100%;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      border-radius: 16px;
+      padding: 40px 50px;
+      transition: box-shadow 0.3s ease;
+    }
+    .cart-container:hover {
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    }
+    h1 {
+      margin-bottom: 20px;
+      color: #222;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      user-select: none;
+    }
+    #user-info {
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #333;
+      line-height: 1.6;
+      font-family: 'Poppins', sans-serif;
+      padding-left: 5px;
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      border-bottom: 1px solid #e2e8f0;
+      transition: background-color 0.25s ease;
+      border-radius: 10px;
+    }
+    .cart-item:hover {
+      background-color: #f9fafb;
+    }
+  .yellow-button {
+    position: relative;
+    display: inline-block;
+    background: #fbc02d;
+    color: #000;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background0.3s ease;
+  }
+
+  .yellow-button:hover {
+    background: #f57f17;
+    color: white;
+  }
+
+
+    .item-details {
+      flex: 1;
+      user-select: none;
+    }
+    .item-name {
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: #2d3748;
+      margin-bottom: 8px;
+    }
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .quantity-btn {
+      background: #38b2ac;
+      border: none;
+      color: white;
+      font-weight: 700;
+      font-size: 1.3rem;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(56, 178, 172, 0.4);
+      transition: background0.3s ease, transform 0.1s ease;
+    }
+    .quantity-btn:hover {
+      background: #2c7a7b;
+      transform: scale(1.1);
+    }
+
+    .quantity-display {
+      min-width: 30px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #4a5568;
+    }
+    
+
+    .item-price, .item-subtotal {
+      width: 90px;
+      font-weight: 600;
+      color: #4a5568;
+      text-align: right;
+      user-select: none;
+      font-size: 1.05rem;
+    }
+    .item-subtotal {
+      font-weight: 700;
+      color: #1a202c;
+    }
+    .remove-btn {
+      background: transparent;
+      border: none;
+      color: #e53e3e;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-left: 18px;
+      transition: color 0.3s ease;
+      user-select: none;
+    }
+    .remove-btn:hover {
+      color: #9b2c2c;
+      text-decoration: underline;
+    }
+    .total-section {
+      margin-top: 40px;
+      text-align: right;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #2d3748;
+      user-select: none;
+    }
+    .checkout-btn {
+      display: block;
+      width: 100%;
+      margin-top: 35px;
+      padding: 18px 0;
+      background: linear-gradient(90deg, #38b2ac 0%, #319795 100%);
+      color: white;
+      font-weight: 700;
+      font-size: 1.3rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(50, 160, 150, 0.5);
+      transition: background0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+    .checkout-btn:hover {
+      background: linear-gradient(90deg, #2c7a7b 0%, #285e61 100%);
+      box-shadow: 0 12px 25px rgba(40, 94, 97, 0.7);
+    }
+  </style>
+</head>
+<body>
+
+<div id="custom-alert" style="display:none;position:fixed;bottom:40px;left:50%;transform:translateX(-50%);background:#fbc02d;color:#000;font-family:'Poppins',sans-serif;font-weight:700;font-size:1.1rem;padding:16px 32px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.2);z-index:9999;opacity:1;transition:opacity 0.3s ease;text-align:center;"></div>
+
+<div class="cart-container">
+  <h1>Your Cart</h1>
+  <div id="user-info"></div>
+  <div id="cart-items"></div>
+  <div class="coupon-section" style="margin: 20px 0;">
+  <input type="text" id="coupon-code" placeholder="Enter coupon code" style="padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+  <button onclick="applyCoupon()" style="padding: 10px 20px; margin-left: 10px; background: #ffca28; font-weight: bold; border-radius: 6px; cursor: pointer;">Apply</button>
+</div>
+<div id="coupon-info" style="color: red; font-weight: 600; margin-top: 8px;"></div>
+
+<div id="available-coupons" style="margin-top: 10px; font-size: 0.9rem; color: #444;">
+  <strong>Available Coupons:</strong>
+  <ul style="padding-left: 1.2rem; margin-top: 4px;">
+    <li><b>FIRST20</b> – 20% off on your first order.</li>
+    <li><b>SAVE10</b> – 10% off on orders over ₹300.</li>
+    <li><b>FLAT100</b> – Flat ₹100 off on orders over ₹1000.</li>
+  </ul>
+</div>
+<div id="coupon-message" style="margin-top: 10px; font-weight: 600;"></div>
+
+  <div class="total-section">Total: ₹<span id="total-amount">0</span></div>
+  <div class="total-section">GST (5%): ₹<span id="gst-amount">0</span></div>
+<div class="total-section" style="font-size: 1.6rem; color: #2c3e50;">
+  Final Amount to Pay: ₹<span id="final-amount">0</span>
+</div>
+
+  <button class="checkout-btn">Place Order</button>
+  <div style="margin-top: 20px;">
+  <a href="index.html" class="yellow-button">➕ Add More Items</a>
+</div>
+
+</div>
+
+<script>
+  
+let appliedDiscount = 0;
+let appliedCoupon = null;
+
+const phone = localStorage.getItem("userPhone");
+const address = localStorage.getItem("userAddress");
+
+if (!phone || !address) {
+  const currentPage = encodeURIComponent(window.location.pathname);
+  window.location.href = `login.html?redirect=${currentPage}`;
+}
+
+document.getElementById("user-info").innerHTML = `
+  <div>📍 <strong>Delivering to:</strong> ${address}</div>
+  <div>📞 <strong>Contact:</strong> ${phone}</div>
+`;
+
+function showBannerAlert(message, type = "success") {
+  const alertBox = document.getElementById("custom-alert");
+  alertBox.textContent = message;
+  alertBox.style.display = "block";
+  alertBox.style.opacity = "1";
+  alertBox.style.backgroundColor = type === "error" ? "#e53935" : "#fbc02d";
+  alertBox.style.color = type === "error" ? "#fff" : "#000";
+  setTimeout(() => { alertBox.style.opacity = "0"; }, 2000);
+  setTimeout(() => {
+    alertBox.style.display = "none";
+    alertBox.style.opacity = "1";
+  }, 2500);
+}
+
+function calculateTotal() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+}
+
+function renderCart() {
+  const cartItemsContainer = document.getElementById("cart-items");
+  const totalAmountEl = document.getElementById("total-amount");
+  const gstAmountEl = document.getElementById("gst-amount");
+  const finalAmountEl = document.getElementById("final-amount");
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  cartItemsContainer.innerHTML = "";
+  let total = 0;
+
+  if (cart.length === 0) {
+    totalAmountEl.textContent = "0";
+    gstAmountEl.textContent = "0";
+    finalAmountEl.textContent = "0";
+    cartItemsContainer.innerHTML = '<p style="text-align:center; font-weight:600;">Your cart is empty.</p>';
+    return;
+  }
+
+  cart.forEach((item, index) => {
+    const subtotal = item.price * item.quantity;
+    total += subtotal;
+
+    const itemDiv = document.createElement("div");
+    itemDiv.className = "cart-item";
+    itemDiv.innerHTML = `
+      <div class="item-details">
+        <div class="item-name">${item.name}</div>
+        <div class="quantity-controls">
+          <button class="quantity-btn decrement">-</button>
+          <div class="quantity-display">${item.quantity}</div>
+          <button class="quantity-btn increment">+</button>
+          <button class="remove-btn">Remove</button>
+        </div>
+      </div>
+      <div class="item-price">₹${item.price}</div>
+      <div class="item-subtotal">₹${subtotal}</div>
+    `;
+
+    cartItemsContainer.appendChild(itemDiv);
+
+    itemDiv.querySelector(".increment").addEventListener("click", () => {
+      cart[index].quantity++;
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    });
+
+    itemDiv.querySelector(".decrement").addEventListener("click", () => {
+      if (cart[index].quantity > 1) {
+        cart[index].quantity--;
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+      }
+    });
+
+    itemDiv.querySelector(".remove-btn").addEventListener("click", () => {
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    });
+  });
+
+  const gst = +(total * 0.05).toFixed(2);
+  const totalWithGst = +(total + gst).toFixed(2);
+  const finalAmount = +(totalWithGst - appliedDiscount).toFixed(2);
+
+  totalAmountEl.textContent = total.toFixed(2);
+  gstAmountEl.textContent = gst.toFixed(2);
+  finalAmountEl.textContent = finalAmount.toFixed(2);
+}
+
+function applyCoupon() {
+  // Show red message about single coupon usage
+  document.getElementById("coupon-info").textContent = "You can apply only 1 coupon at a time";
+
+  const code = document.getElementById("coupon-code").value.trim().toUpperCase();
+  const totalBeforeDiscount = calculateTotal();
+  const user = localStorage.getItem("userPhone") || "guest";
+
+  fetch("http://127.0.0.1:5000/validate_coupon", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ code, total: totalBeforeDiscount, user })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.valid) {
+        appliedCoupon = code;
+        appliedDiscount = data.discount;
+        document.getElementById("coupon-message").innerText = data.message;
+        showBannerAlert(`✅ ${data.message}`);
+      } else {
+        appliedCoupon = null;
+        appliedDiscount = 0;
+        document.getElementById("coupon-message").innerText = data.message;
+        showBannerAlert(`❌ ${data.message}`, "error");
+      }
+      renderCart(); // Recalculate totals
+    })
+    .catch(err => {
+      console.error(err);
+      showBannerAlert("Server error. Try again later.", "error");
+    });
+}
+
+document.querySelector(".checkout-btn").addEventListener("click", () => {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const user = localStorage.getItem("userPhone") || "guest";
+
+  if (cart.length === 0) {
+    showBannerAlert("Your cart is empty!", "error");
+    return;
+  }
+
+  fetch("http://127.0.0.1:5000/submit_order", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      user,
+      cart
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        showBannerAlert("✅ Order placed successfully!");
+        localStorage.removeItem("cart");
+        localStorage.setItem("hasOrdered", "true");
+        renderCart();
+
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 2500);
+      } else {
+        showBannerAlert("❌ Failed to place order", "error");
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      showBannerAlert("Server error while placing order", "error");
+    });
+});
+
+
+renderCart();
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,325 @@
+/* Base styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  line-height: 1.6;
+}
+
+header {
+  background: 
+    linear-gradient(90deg, rgba(251,192,45, 0.95), rgba(249,168,37, 0.95)),
+    url('https://www.transparenttextures.com/patterns/food.png'); /* Example texture */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #000;
+  padding: 1rem 1rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: none;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 4px solid #fff59d;
+}
+
+
+
+/* Menu container */
+.menu {
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Section titles */
+h2 {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  color: #fbc02d;
+  border-left: 6px solid #fbc02d;
+  padding-left: 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Item card */
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-info h3 {
+  margin: 0 0 0.4rem 0;
+  font-size: 1.25rem;
+  color: #111;
+}
+
+.item-info p {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #666;
+}
+
+.item img {
+  height: 100px;
+  width: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-left: 1.5rem;
+}
+
+/* Buttons */
+.item button {
+  margin-top: 0.8rem;
+  background-color: #fbc02d;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.item button:hover {
+  background-color: #f9a825;
+  transform: scale(1.05);
+}
+
+/* Cart */
+.cart {
+  text-align: center;
+  padding: 2rem;
+  background-color: #fff;
+  margin: 3rem auto;
+  max-width: 500px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.cart h2 {
+  color: #fbc02d;
+  margin-bottom: 1.2rem;
+  font-size: 1.6rem;
+}
+
+.cart a,
+.cart button {
+  display: inline-block;
+  margin: 0.5rem 0.5rem 0;
+  background-color: #fbc02d;
+  color: #000;
+  padding: 12px 24px;
+  text-decoration: none;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.cart a:hover,
+.cart button:hover {
+  background-color: #f9a825;
+  transform: scale(1.05);
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .item img {
+    margin: 1rem 0 0 0;
+  }
+}
+.veg-dot,
+.nonveg-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  border: 1.5px solid #000;
+  vertical-align: middle;
+}
+
+.veg-dot {
+  background-color: #2e7d32; /* Green */
+}
+
+.nonveg-dot {
+  background-color: #c62828; /* Red */
+}
+.emoji {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Shadow for better visibility */
+  font-size: 1.2em; /* Optional: make the emoji slightly bigger */
+}
+/* Logo box styling */
+.logo-box {
+  width: 60px;
+  height: 60px;
+  background-color: #000000;
+  border-radius: 12px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  font-size: 2rem;
+  color: #ffffff;
+  font-family: 'Arial Black', Arial, sans-serif;
+  letter-spacing: 3px;
+  cursor: default;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Search container styling */
+.search-container {
+  position: relative;
+  max-width: 400px;
+  flex-grow: 1;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.search-container input[type="text"] {
+  width: 100%;
+  padding: 0.5rem 2.5rem 0.5rem 1rem; /* space for icon on right */
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+
+
+/* Make offer section text red */
+section {
+  padding: 1rem 2rem;
+  background-color: #fffde7;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: red; /* changed from #f57f17 */
+  text-align: center;
+}
+
+section span {
+  background-color: #fff176;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  color: red;
+  font-weight: 900;
+}
+.menu .item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.menu .item img {
+  width: 140px; /* Bigger image */
+  height: 140px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  flex-shrink: 0; /* prevent image from shrinking */
+}
+
+.menu .item-info {
+  flex: 1; /* take remaining space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 140px; /* same height as image for vertical alignment */
+}
+
+.menu .item-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #131313; /* bright accent color */
+  margin-bottom: 0.4rem;
+  text-transform: capitalize;
+}
+
+.menu .item-info p {
+  margin: 0.15rem 0;
+  color: #555;
+  font-size: 1rem;
+}
+
+.menu .item-info p:last-of-type {
+  font-weight: 700;
+  color: #333;
+  font-size: 1.1rem;
+  margin-top: auto;
+}
+
+.menu button {
+  align-self: flex-start;
+  padding: 0.4rem 1.2rem;
+  background-color: #f57f17;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.menu button:hover {
+  background-color: #d26900;
+}
+
+/* Optional: On smaller screens make items stack vertically */
+@media (max-width: 600px) {
+  .menu .item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .menu .item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .menu .item-info {
+    height: auto;
+  }
+
+  .menu button {
+    margin-top: 0.5rem;
+  }
+}

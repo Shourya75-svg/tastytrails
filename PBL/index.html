@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tasty Trails 🍕</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap" rel="stylesheet">
+  <style>
+    .item-info h3.item-name {
+  font-weight: normal !important;
+}
+
+.item-info p {
+  font-weight: normal !important;
+}
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #fff8e1;
+      z-index: 1000;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 1rem;
+      flex-wrap: wrap;
+    }
+    .logo-box {
+      font-weight: 900;
+      font-size: 1.6rem;
+      color: #f57f17;
+      margin-right: 0.5rem;
+    }
+    .top-header h1 {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #f57f17;
+      margin: 0;
+    }
+    .search-container input {
+      padding: 0.4rem 1rem;
+      font-size: 1rem;
+      border-radius: 20px;
+      border: 1px solid #f57f17;
+      width: 250px;
+    }
+    .auth-buttons a {
+  background: #4caf50;
+  color: white;
+  padding: 8px 14px; /* slightly more vertical padding */
+  margin-top: 1px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+    .discount-banner {
+      background: #fbc02d;
+      padding: 8px 20px;
+      font-weight: 700;
+      color: #000;
+      font-size: 1rem;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .discount-banner span {
+      display: inline-block;
+      animation: scroll-left 10s linear infinite;
+    }
+    @keyframes scroll-left {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    .category-bar {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      padding: 8px 12px;
+      background: #fff3e0;
+      border-top: 1px solid #fdd835;
+      border-bottom: 1px solid #fdd835;
+      position: sticky;
+      top: 82px;
+      z-index: 999;
+      flex-wrap: wrap;
+    }
+    .category-bar a {
+      padding: 6px 16px;
+      background: #ffca28;
+      color: #000;
+      border-radius: 20px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .category-bar a:hover {
+      background: #f57f17;
+      color: white;
+    }
+    .menu {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      margin-bottom: 15px;
+      padding: 12px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .item-info h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      
+      
+      color: #444;
+    }
+    
+    .item-info p {
+      margin: 4px 0;
+     
+    }
+    .item button {
+      padding: 6px 14px;
+      background: #fbc02d;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .item button:hover {
+      background: #f57f17;
+      color: white;
+    }
+    .item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    #custom-alert {
+      display: none;
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fbc02d;
+      color: #000;
+      font-weight: 600;
+      padding: 16px 32px;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+      text-align: center;
+    }
+    .view-cart-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #00b894;
+  color: white;
+  font-weight: bold;
+  padding: 14px 24px;           /* Increased size */
+  font-size: 1.05rem;           /* Slightly larger text */
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  z-index: 10000;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  animation: pulse 1.5s infinite;
+}
+.view-cart-btn:hover {
+    background-color: #019875;
+    transform: scale(1.08);
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+    footer {
+      background: #000;
+      color: white;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    footer .logo-box {
+      color: #fbc02d;
+      font-size: 1.4rem;
+      font-weight: 900;
+    }
+  </style>
+</head>
+<body>
+  <div id="custom-alert"></div>
+
+  <header>
+    <div class="top-header">
+      <div style="display: flex; align-items: center;">
+        <div class="logo-box">TT</div>
+        <h1>Tasty Trails <span>🍕</span></h1>
+      </div>
+      <div class="search-container">
+        <input type="text" id="searchBar" placeholder="Search..." />
+
+      </div>
+      <div class="auth-buttons">
+        <a href="login.html">Login</a>
+      </div>
+    </div>
+    <div class="discount-banner">
+      <span>🔥 Limited Time Offer: Get 20% OFF on your first order! 🔥</span>
+    </div>
+    <div class="category-bar">
+      <a href="#starters">Starters</a>
+      <a href="#main-course">Main Course</a>
+      <a href="#breads">Breads</a>
+      <a href="#desserts">Desserts</a>
+      <a href="#beverages">Beverages</a>
+    </div>
+  </header>
+  <div style="text-align:center; margin: 1rem 0;">
+  <label for="sort-select" style="font-weight:600; margin-right: 8px;">Sort By:</label>
+  <select id="sort-select" style="padding: 6px 12px; border-radius: 8px; border: 1px solid #f57f17; font-family: 'Poppins', sans-serif;">
+    <option value="default">Default</option>
+    <option value="low-to-high">Price: Low to High</option>
+    <option value="high-to-low">Price: High to Low</option>
+  </select>
+</div>
+
+
+  <main>
+    
+    <div class="menu">
+
+      <!-- Starters Section -->
+      <h2 id="starters" class="menu-section"><span style="color: green;">&bull;</span> VEG STARTERS</h2>
+      <div class="item-group">
+        <div class="item" data-price="249" onclick="viewItem('Margherita Pizza', 249, 'pizza.jpg')">
+       <div class="item-info">
+          <h3 class = "item-name">Margherita Pizza</h3>
+          <p>Classic cheese pizza with tomato base.</p>
+          <p>₹249</p>
+          <button onclick="addToCart('Margherita Pizza', 249)">ADD</button>
+        </div>
+        <img src="pizza.jpg" alt="Pizza">
+      </div>
+
+      <div class="item" data-price="30" onclick="viewItem('Burger', 30, 'burger.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Burger</h3>
+          <p>Juicy grilled burger layered with fresh veggies and tangy sauces.</p>
+          <p>₹30</p>
+          <button onclick="addToCart('Burger', 30)">ADD</button>
+        </div>
+        <img src="burger.jpg" alt="Burger">
+      </div>
+
+      <div class="item" data-price="129" onclick="viewItem('Garlic Bread', 129, 'garlic bread.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Garlic Bread</h3>
+          <p>Crispy garlic bread topped with melted butter and herbs.</p>
+          <p>₹129</p>
+          <button onclick="addToCart('Garlic Bread', 129)">ADD</button>
+        </div>
+        <img src="garlic bread.jpg" alt="Garlic Bread">
+      </div>
+
+      <div class="item" data-price="149" onclick="viewItem('White Sauce Pasta', 149, 'white sauce pasta.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">White Sauce Pasta</h3>
+          <p>Creamy white sauce pasta tossed with veggies and Italian herbs.</p>
+          <p>₹149</p>
+          <button onclick="addToCart('White Sauce Pasta', 149)">ADD</button>
+        </div>
+        <img src="white sauce pasta.jpg" alt="White Sauce Pasta">
+      </div>
+
+      <div class="item" data-price="129" onclick="viewItem('Fries', 129, 'fries.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Fries</h3>
+          <p>Golden, crispy fries seasoned with a hint of salt.</p>
+          <p>₹129</p>
+          <button onclick="addToCart('Fries', 129)">ADD</button>
+        </div>
+        <img src="fries.jpg" alt="Fries">
+      </div>
+      </div>
+
+      
+      
+
+      <h2><span style="color: red;">&bull;</span> NON-VEG STARTERS</h2>
+      <div class="item-group">
+         <div class="item" data-price="179" onclick="viewItem('Chicken Wings', 179, 'Chicken wings.jpg')">
+          <div class="item-info">
+            <h3 class = "item-name">Chicken Wings</h3>
+            <p>Spicy and tender chicken wings glazed with flavorful sauce.</p>
+            <p>₹179</p>
+            <button onclick="addToCart('Chicken Wings', 179)">ADD</button>
+          </div>
+          <img src="Chicken wings.jpg" alt="Chicken Wings">
+        </div>
+
+        <div class="item" data-price="199" onclick="viewItem('Fish Fry', 199, 'Fish fry.jpg')">
+          <div class="item-info">
+            <h3 class = "item-name">Fish Fry</h3>
+            <p>Crispy fried fish fillets seasoned with aromatic spices.</p>
+            <p>₹199</p>
+            <button onclick="addToCart('Fish Fry', 199)">ADD</button>
+          </div>
+          <img src="Fish fry.jpg" alt="Fish Fry">
+        </div>
+
+        <div class="item" data-price="189" onclick="viewItem('Chicken Seekh Kebab', 189, 'Chicken seekh kabab.jpg')">
+          <div class="item-info">
+            <h3 class = "item-name">Chicken Seekh Kebab</h3>
+            <p>Juicy minced chicken kebabs grilled with spices and herbs.</p>
+            <p>₹189</p>
+            <button onclick="addToCart('Chicken Seekh Kebab', 189)">ADD</button>
+          </div>
+          <img src="Chicken seekh kebab.jpg" alt="Chicken Seekh Kebab">
+       </div>
+
+         <div class="item" data-price="229" onclick="viewItem('Prawn Tempura', 229, 'Prawn tempura.jpg')">
+          <div class="item-info">
+            <h3 class = "item-name">Prawn Tempura</h3>
+            <p>Light and crispy battered prawns fried to golden perfection.</p>
+            <p>₹229</p>
+            <button onclick="addToCart('Prawn Tempura', 229)">ADD</button>
+          </div>
+          <img src="Prawn tempura.jpg" alt="Prawn Tempura">
+       </div>
+
+ 
+
+
+
+        <div class="item" data-price="149" onclick="viewItem('Chicken Nuggets', 149, 'chicken nuggets.jpg')">
+          <div class="item-info">
+            <h3 class = "item-name">Chicken Nuggets</h3>
+            <p>Crunchy bite-sized chicken nuggets with a tender center.</p>
+            <p>₹149</p>
+            <button onclick="addToCart('Chicken Nuggets', 149)">ADD</button>
+          </div>
+          <img src="chicken nuggets.jpg" alt="Chicken Nuggets">
+        </div>
+
+      </div>
+
+      
+      <!-- Main Course Section -->
+      <h2 id="main-course" class="menu-section"><span style="color: green;">&bull;</span> VEG MAIN COURSE</h2>
+      <div class="item-group">
+       <div class="item" data-price="119" onclick="viewItem('Paneer Butter Masala', 119, 'paneer butter masala.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Paneer Butter Masala</h3>
+          <p>Soft paneer cubes simmered in a rich and creamy tomato gravy.</p>
+          <p>₹119</p>
+          <button onclick="addToCart('Paneer Butter Masala', 119)">ADD</button>
+        </div>
+        <img src="paneer butter masala.jpg" alt="Paneer Butter Masala">
+      </div>
+
+      <div class="item" data-price="199" onclick="viewItem('Veg Biryani', 199, 'veg biryani.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Veg Biryani</h3>
+          <p>Aromatic basmati rice cooked with mixed vegetables and fragrant spices.</p>
+          <p>₹199</p>
+          <button onclick="addToCart('Veg Biryani', 199)">ADD</button>
+        </div>
+        <img src="veg biryani.jpg" alt="Veg Biryani">
+      </div>
+
+      <div class="item" data-price="199" onclick="viewItem('Paneer Tikka Masala', 199, 'paneer tikka masala.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Paneer Tikka Masala</h3>
+          <p>Grilled paneer chunks cooked in a spicy and creamy tomato-based sauce.</p>
+          <p>₹199</p>
+          <button onclick="addToCart('Paneer Tikka Masala', 199)">ADD</button>
+        </div>
+        <img src="paneer tikka masala.jpg" alt="Paneer Tikka Masala">
+      </div>
+
+      <div class="item" data-price="179" onclick="viewItem('Dal Makhani', 179, 'dal makhni.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Dal Makhani</h3>
+          <p>Slow-cooked black lentils simmered in a buttery, creamy sauce.</p>
+          <p>₹179</p>
+          <button onclick="addToCart('Dal Makhani', 179)">ADD</button>
+        </div>
+        <img src="dal makhni.jpg" alt="Dal Makhani">
+      </div>
+
+      <div class="item" data-price="179" onclick="viewItem('Mix Veg', 179, 'mix veg.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Mix veg</h3>
+          <p>A colorful medley of fresh vegetables sautéed with aromatic spices.</p>
+          <p>₹179</p>
+          <button onclick="addToCart('Mix Veg', 179)">ADD</button>
+        </div>
+        <img src="mix veg.jpg" alt="Mix Veg">
+      </div>
+      </div>
+
+      
+
+      <h2><span style="color: red;">&bull;</span> NON-VEG MAIN COURSE</h2>
+      <div class="item-group">
+      <div class="item" data-price="249" onclick="viewItem('Chicken Biryani', 249, 'chicken biryani.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Chicken Biryani</h3>
+          <p>Fragrant basmati rice layered with tender, spiced chicken and herbs.</p>
+          <p>₹249</p>
+          <button onclick="addToCart('Chicken Biryani', 249)">ADD</button>
+        </div>
+        <img src="chicken biryani.jpg" alt="Chicken Biryani">
+      </div>
+
+      <div class="item" data-price="199" onclick="viewItem('Chicken Curry', 199, 'chicken curry.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Chicken Curry</h3>
+          <p>Hearty chicken simmered in a rich, spiced curry sauce.</p>
+          <p>₹199</p>
+          <button onclick="addToCart('Chicken Curry', 199)">ADD</button>
+        </div>
+        <img src="chicken curry.jpg" alt="Chicken Curry">
+      </div>
+
+      <div class="item" data-price="249" onclick="viewItem('Fish Curry', 249, 'fish curry.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Fish curry</h3>
+          <p>Tangy and spicy fish cooked in a flavorful curry gravy.</p>
+          <p>₹249</p>
+          <button onclick="addToCart('Fish Curry', 249)">ADD</button>
+        </div>
+        <img src="fish curry.jpg" alt="Fish Curry">
+      </div>
+
+      <div class="item" data-price="199" onclick="viewItem('Chicken Tikka', 199, 'chicken tikka.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Chicken Tikka</h3>
+          <p>Marinated chicken pieces grilled to smoky perfection.</p>
+          <p>₹199</p>
+          <button onclick="addToCart('Chicken Tikka', 199)">ADD</button>
+        </div>
+        <img src="chicken tikka.jpg" alt="Chicken Tikka">
+      </div>
+
+      <div class="item" data-price="199" onclick="viewItem('Fish Fry', 199, 'Fish fry.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Fish Fry</h3>
+          <p>Crispy fried fish fillets seasoned with aromatic spices.</p>
+          <p>₹199</p>
+          <button onclick="addToCart('Fish Fry', 199)">ADD</button>
+        </div>
+        <img src="Fish fry.jpg" alt="Fish Fry">
+      </div>
+
+      </div>
+
+      
+      <!-- Breads -->
+      <h2 id="breads" class="menu-section">BREADS</h2>
+      <div class="item-group">
+      <div class="item" data-price="29" onclick="viewItem('Butter Naan', 29, 'butter naan.jpg')">
+        <div class="item-info">
+          <p>Soft, fluffy naan bread brushed with melted butter.</p>
+          <h3 class = "item-name">Butter Naan</h3>
+          <p>₹29</p>
+          <button onclick="addToCart('Butter Naan', 29)">ADD</button>
+        </div>
+        <img src="butter naan.jpg" alt="Butter Naan">
+      </div>
+
+      <div class="item" data-price="39" onclick="viewItem('Garlic Naan', 39, 'garlic naan.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Garlic Naan</h3>
+          <p>Warm naan bread infused with garlic and buttery goodness.</p>
+          <p>₹39</p>
+          <button onclick="addToCart('Garlic Naan', 39)">ADD</button>
+        </div>
+        <img src="garlic naan.jpg" alt="Garlic Naan">
+      </div>
+      
+      <div class="item" data-price="29" onclick="viewItem('Plain roti', 29, 'plain roti.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Plain roti</h3>
+          <p>Whole wheat flatbread cooked to soft, light perfection.</p>
+          <p>₹29</p>
+          <button onclick="addToCart('Plain roti', 29)">ADD</button>
+        </div>
+        <img src="plain roti.jpg" alt="Plain roti">
+      </div>
+
+      </div>
+
+      
+      <!-- Desserts -->
+      <h2 id="desserts" class="menu-section">DESSERTS</h2>
+      <div class="item-group">
+
+      <div class="item" data-price="199" onclick="viewItem('Chocolate Cake', 199, 'cake.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Chocolate Cake</h3>
+          <p>Rich and moist chocolate cake with a smooth cocoa frosting.</p>
+          <p>₹199</p>
+          <button onclick="addToCart('Chocolate Cake', 199)">ADD</button>
+        </div>
+        <img src="cake.jpg" alt="Chocolate Cake">
+      </div>
+
+      <div class="item" data-price="39" onclick="viewItem('Ice Cream', 39, 'ice cream.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Ice Cream</h3>
+          <p>Creamy, cold ice cream available in delicious flavors.</p>
+          <p>₹39</p>
+          <button onclick="addToCart('Ice Cream', 39)">ADD</button>
+        </div>
+        <img src="ice cream.jpg" alt="Ice Cream">
+      </div>
+
+      <div class="item" data-price="149" onclick="viewItem('Brownie', 149, 'brownie.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Brownie</h3>
+          <p>Fudgy chocolate brownie with a gooey, rich center.</p>
+          <p>₹149</p>
+          <button onclick="addToCart('Brownie', 149)">ADD</button>
+        </div>
+        <img src="brownie.jpg" alt="Brownie">
+      </div>
+
+      <div class="item" data-price="49" onclick="viewItem('Gulab Jamun', 49, 'gulab jamun.jpg')">
+        <div class="item-info">
+         <h3 class = "item-name">Gulab jamun</h3>
+         <p>Soft, syrup-soaked sweet dumplings flavored with cardamom.</p>
+          <p>₹49</p>
+          <button onclick="addToCart('Gulab Jamun', 49)">ADD</button>
+        </div>
+        <img src="gulab jamun.jpg" alt="Gulab Jamun">
+      </div>
+
+      <div class="item" data-price="99" onclick="viewItem('Ras Malai', 99, 'rasmalai.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Ras Malai</h3>
+          <p>Soft cheese patties soaked in sweet, creamy saffron milk.</p>
+          <p>₹99</p>
+          <button onclick="addToCart('Ras Malai', 99)">ADD</button>
+        </div>
+        <img src="rasmalai.jpg" alt="Ras Malai">
+      </div>
+      </div>
+
+      
+
+      <!-- Beverages -->
+      <h2 id="beverages" class="menu-section">BEVERAGES</h2>
+      <div class="item-group">
+
+       <div class="item" data-price="79" onclick="viewItem('Blue Lime Mojito',79, 'mojito.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Blue Lime Mojito</h3>
+          <p>Refreshing lime mojito with a hint of sweetness and mint.</p>
+          <p>₹79</p>
+          <button onclick="addToCart('Blue Lime Mojito', 79)">ADD</button>
+        </div>
+        <img src="mojito.jpg" alt="Blue Lime Mojito">
+      </div>
+
+      <div class="item" data-price="125" onclick="viewItem('Choco Oreo Shake', 125, 'oreo shake.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Choco Oreo shake</h3>
+          <p>Creamy chocolate shake blended with crunchy Oreo cookies.</p>
+          <p>₹125</p>
+          <button onclick="addToCart('Choco Oreo Shake', 125)">ADD</button>
+        </div>
+        <img src="oreo shake.jpg" alt="Choco Oreo Shake">
+      </div>
+
+      <div class="item" data-price="50" onclick="viewItem('Lemon Ice Tea', 50, 'lemon ice tea.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Lemon Ice Tea</h3>
+          <p>Chilled lemon iced tea with a tangy and refreshing flavor.</p>
+          <p>₹50</p>
+          <button onclick="addToCart('Lemon Ice Tea', 50)">ADD</button>
+        </div>
+        <img src="lemon ice tea.jpg" alt="Lemon Ice Tea">
+      </div>
+    
+
+      <div class="item" data-price="79" onclick="viewItem('Cold Coffee', 79, 'cold coffee.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">Cold coffee</h3>
+          <p>Smooth and chilled coffee blended with creamy milk and ice.</p>
+          <p>₹79</p>
+          <button onclick="addToCart('Cold Coffee', 79)">ADD</button>
+        </div>
+        <img src="cold coffee.jpg" alt="Cold Coffee">
+      </div>
+
+      <div class="item" data-price="39" onclick="viewItem('Tea', 39, 'tea.jpg')">
+        <div class="item-info">
+          <h3 class = "item-name">tea</h3>
+          <p>Classic hot tea brewed to perfection with rich aroma.</p>
+          <p>₹39</p>
+          <button onclick="addToCart('Tea', 39)">ADD</button>
+        </div>
+        <img src="tea.jpg" alt="Tea">
+      </div>
+
+      </div>
+
+      
+      </div>
+  
+    
+  </main>
+
+  <a class="view-cart-btn" href="cart.html">🛒 View Cart</a>
+  <section class="recently-viewed" style="padding: 2rem;">
+  <h2 style="margin-bottom: 1rem;">🔁 Recently Viewed</h2>
+  <div id="recent-items" style="display: flex; gap: 16px; flex-wrap: wrap;"></div>
+</section>
+
+
+  <footer>
+    <div class="logo-box">TT</div>
+    <p>📍 Tasty Trails HQ, Char Khamba, Clement Town, Dehradun, Uttrakhand, India</p>
+    <p>📞 8218732853</p>
+    <p>📧 info@tastytrails.com</p>
+    
+
+  </footer>
+
+  <script>
+
+  const searchInput = document.getElementById("searchBar");
+
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim().toLowerCase();
+    const items = document.querySelectorAll(".item");
+
+    items.forEach(item => {
+      const name = item.querySelector(".item-name").textContent.toLowerCase();
+      const show = name.includes(query);
+      item.style.display = show ? "flex" : "none";
+    });
+  });
+
+  function addToCart(name, price) {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const existingItem = cart.find(item => item.name === name);
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      cart.push({ name, price, quantity: 1 });
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    showBannerAlert(`${name} added to cart!`);
+  }
+
+  function showBannerAlert(message) {
+    const alertBox = document.getElementById("custom-alert");
+    alertBox.textContent = message;
+    alertBox.style.display = "block";
+    alertBox.style.opacity = "1";
+    alertBox.style.fontWeight = "normal"; // ← ensures it’s not bold
+    setTimeout(() => (alertBox.style.opacity = "0"), 2000);
+    setTimeout(() => {
+      alertBox.style.display = "none";
+      alertBox.style.opacity = "1";
+    }, 2500);
+  }
+
+  function logoutUser() {
+    localStorage.removeItem("userPhone");
+    localStorage.removeItem("userAddress");
+    showBannerAlert("You have been logged out.");
+    setTimeout(() => location.reload(), 1500);
+  }
+  document.getElementById("sort-select").addEventListener("change", function () {
+  const sortType = this.value;
+
+  const groups = document.querySelectorAll('.item-group');
+  
+  groups.forEach(group => {
+    const items = Array.from(group.querySelectorAll('.item'));
+
+    if (sortType === "low-to-high") {
+      items.sort((a, b) => +a.dataset.price - +b.dataset.price);
+    } else if (sortType === "high-to-low") {
+      items.sort((a, b) => +b.dataset.price - +a.dataset.price);
+    }
+
+    // Re-append sorted items
+    items.forEach(item => group.appendChild(item));
+  });
+});
+  function viewItem(name, price, image) {
+    const maxItems = 5;
+    let viewed = JSON.parse(localStorage.getItem("recentlyViewed")) || [];
+
+    // Remove if already exists
+    viewed = viewed.filter(item => item.name !== name);
+
+    // Add to end (like a queue)
+    viewed.push({ name, price, image });
+
+    // Limit to last 5
+    if (viewed.length > maxItems) viewed.shift();
+
+    localStorage.setItem("recentlyViewed", JSON.stringify(viewed));
+  }
+  function showRecentlyViewed() {
+    const container = document.getElementById("recent-items");
+    const viewed = JSON.parse(localStorage.getItem("recentlyViewed")) || [];
+
+    if (viewed.length === 0) {
+      container.innerHTML = "<p style='color: #666;'>No items viewed yet.</p>";
+      return;
+    }
+
+    container.innerHTML = "";
+    viewed.reverse().forEach(item => {
+      const card = document.createElement("div");
+      card.style = "width: 160px; background: #fff8e1; border-radius: 10px; padding: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);";
+      card.innerHTML = `
+        <img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px;">
+        <h4 style="margin: 8px 0 4px; font-size: 1rem; color: #444;">${item.name}</h4>
+        <p style="margin: 0; color: #777;">₹${item.price}</p>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  // Call on load
+  showRecentlyViewed();
+let bestsellerItems = [];
+
+fetch("http://127.0.0.1:5000/most_added_items")
+  .then(res => res.json())
+  .then(data => {
+    bestsellerItems = data.map(item => item[0]); // only names
+    tagBestsellers();
+  });
+
+function tagBestsellers() {
+  document.querySelectorAll(".item").forEach(item => {
+    const itemName = item.querySelector(".item-name").textContent.trim();
+    if (bestsellerItems.includes(itemName)) {
+      const tag = document.createElement("span");
+      tag.textContent = "🔥 Bestseller";
+      tag.style = "color: red; font-weight: bold; margin-left: 10px;";
+      item.querySelector(".item-name").appendChild(tag);
+    }
+  });
+}
+
+
+
+
+
+  </script>
+</body>
+</html>

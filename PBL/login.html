@@ -1,0 +1,198 @@
+<DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tasty Trails - Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fbc02d, #fff8e1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-container {
+      background-color: #fff;
+      padding: 2rem 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .login-container h2 {
+      color: #f9a825;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 12px 15px;
+      margin: 0.75rem 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+
+    .login-container button {
+      width: 100%;
+      background-color: #fbc02d;
+      color: #000;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+    .login-container button:hover {
+      background-color: #f9a825;
+      transform: scale(1.05);
+    }
+
+    .login-container p {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    #green-alert {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  font-family: 'Poppins', sans-serif;
+}
+
+.green-alert-box {
+  background: #f9f9f6;
+  color: rgb(10, 10, 10);
+  padding: 20px 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  animation: popIn 0.3s ease-out;
+}
+
+.green-alert-box button {
+  margin-top: 12px;
+  padding: 6px 16px;
+  background: rgb(132, 237, 115);
+  color: #0b0b0b;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+    
+
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login to Tasty Trails</h2>
+    <form id="login-form">
+      <input type="tel" name="phone" id="phone" placeholder="Phone Number" required />
+      <input type="text" name="address" id="address" placeholder="Delivery Address" required />
+      <button type="submit">Continue</button>
+    </form>
+    <button onclick="logoutUser()" style="
+  margin-top: 1rem;
+  padding: 10px 18px;
+  background: #f44336;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+">
+  🔒 Logout
+</button>
+
+  </div>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const phone = document.getElementById('phone').value.trim();
+      const address = document.getElementById('address').value.trim();
+
+      if (!phone || !address) {
+        alert('Please enter both phone number and delivery address.');
+        return;
+      }
+
+      // Save to localStorage
+      localStorage.setItem('userPhone', phone);
+      localStorage.setItem('userAddress', address);
+
+      // Redirect to intended page or cart
+      const params = new URLSearchParams(window.location.search);
+      const redirectTo = params.get('redirect') || 'cart.html';
+      window.location.href = redirectTo;
+    });
+  function logoutUser() {
+    localStorage.removeItem("userPhone");
+    localStorage.removeItem("userAddress");
+
+    alert("You have been logged out.");
+    
+    // Optional: redirect to login page again
+    // window.location.href = "login.html";
+    
+    // Or reload the page
+    location.reload();
+  }
+  
+  function logoutUser() {
+    localStorage.removeItem("userPhone");
+    localStorage.removeItem("userAddress");
+
+    // Show green alert
+    document.getElementById("green-alert").style.display = "flex";
+  }
+
+  function closeGreenAlert() {
+    document.getElementById("green-alert").style.display = "none";
+    location.reload(); // or redirect if needed
+  }
+
+  function closeGreenAlert() {
+  document.getElementById("green-alert").style.display = "none";
+  window.location.href = "index.html"; // Redirect to index.html
+}
+
+
+
+
+  </script>
+  <div id="green-alert" style="display: none;">
+  <div class="green-alert-box">
+    <p>You have been logged out.</p>
+    <button onclick="closeGreenAlert()">Okay</button>
+  </div>
+</div>
+
+</body>
+</html>
